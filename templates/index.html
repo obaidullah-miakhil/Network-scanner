@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Network Scanner</h1>
+<form method="post" action="{{ url_for('scan') }}">
+  <label for="scan_type">Choose an option:</label>
+  <select id="scan_type" name="scan_type">
+    <option value="host">Scan Hosts</option>
+    <option value="subnet">Scan Subnets</option>
+  </select>
+  
+  <div id="host-inputs">
+    <label for="tgtHost">Target Host IP or hostname:</label>
+    <input type="text" id="tgtHost" name="tgtHost">
+    
+    <label for="tgtPorts">Target Port(s) (comma-separated):</label>
+    <input type="text" id="tgtPorts" name="tgtPorts">
+  </div>
+  
+  <div id="subnet-inputs" style="display:none;">
+    <label for="subnet">Subnet (CIDR notation):</label>
+    <input type="text" id="subnet" name="subnet">
+  </div>
+  
+  <button type="submit">Scan</button>
+</form>
+
+<script>
+  document.getElementById('scan_type').addEventListener('change', function() {
+    var hostInputs = document.getElementById('host-inputs');
+    var subnetInputs = document.getElementById('subnet-inputs');
+    if (this.value == 'host') {
+      hostInputs.style.display = 'block';
+      subnetInputs.style.display = 'none';
+    } else {
+      hostInputs.style.display = 'none';
+      subnetInputs.style.display = 'block';
+    }
+  });
+</script>
+{% endblock %}

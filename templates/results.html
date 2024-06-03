@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Scan Results</h1>
+<pre>{{ results }}</pre>
+<a href="{{ url_for('index') }}">Go Back</a>
+{% endblock %}
